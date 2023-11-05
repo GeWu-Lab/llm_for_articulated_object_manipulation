@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Kinematic-aware Prompting for Generalizable Articulated Object Manipulation with LLMs.">
+  <meta name="keywords" content="Audio-visual, modality imbalance">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kinematic-aware Prompting for Generalizable Articulated Object Manipulation with LLMs</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://xwinks.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://gewu-lab.github.io/">
+            GeWu-Lab
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Kinematic-aware Prompting for Generalizable Articulated Object Manipulation with LLMs</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://xwinks.github.io/">Wenke Xia</a><sup>1</sup>,<sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="">Dong Wang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="">Xincheng Pang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Zhigang Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Bin Zhao</a><sup>2</sup>,<sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Di Hu</a><sup>1</sup><sup>*</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Gaoling School of Artificial Intelligence, Renmin University of China</span>
+            <span class="author-block"><sup>2</sup>Shanghai Artificial Intelligence Laboratory</span>
+            <span class="author-block"><sup>3</sup>Northwestern Polytechnical University</span>
+          </div>
+
+          <div class="is-size-7">
+            <span>* Corresponding author</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2302.10912"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2302.10912"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="bottle" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/bottle.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="faucet" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/faucet.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="low_open_cabinet" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/low_open_cabinet.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="close_cabinet" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/close_cabinet.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="pot" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pot.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="stapler" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/stapler.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-steve">
+          <video poster="" id="low_bucket" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/low_bucket.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-steve">
+          <video poster="" id="low_close_oven_demo" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/low_close_oven_demo.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-steve">
+          <video poster="" id="low_open_fri" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/low_open_fri.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Generalizable articulated object manipulation is essential for home-assistant robots. Recent efforts focus on imitation learning from demonstrations or reinforcement learning in simulation, however, due to the prohibitive costs of real-world data collection and precise object simulation, it still remains challenging for these works to achieve broad adaptability across diverse articulated objects. 
+            Recently, many works have tried to utilize the strong in-context learning ability of Large Language Models (LLMs) to achieve generalizable robotic manipulation, but most of these researches focus on high-level task planning, sidelining low-level robotic control.
+            In this work, building on the idea that the kinematic structure of the object determines how we can manipulate it, we propose a kinematic-aware prompting framework that prompts LLMs with kinematic knowledge of objects to generate low-level motion trajectory waypoints, supporting various object manipulation.
+            To effectively prompt LLMs with the kinematic structure of different objects, we design a unified kinematic knowledge parser, which represents various articulated objects as a unified textual description containing kinematic joints and contact location.
+            Building upon this unified description, a kinematic-aware planner model is proposed to generate precise 3D manipulation waypoints via a designed kinematic-aware chain-of-thoughts prompting method.
+            Our evaluation spanned 48 instances across 16 distinct categories, revealing that our framework not only outperforms traditional methods on 8 seen categories but also shows a powerful zero-shot capability for 8 unseen articulated object categories with only 17 demonstrations.
+            Moreover, the real-world experiments on 7 different object categories prove our framework's adaptability in practical scenarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Generalizable articulated object manipulation is imperative for building intelligent and multi-functional robots.
+            However, due to the considerable heterogeneity in the kinematic structures of objects, the manipulation policy might vary drastically across different object instances and categories. 
+            To ensure consistent performance in automated tasks within intricate real-world scenarios, prior works on generalizable object manipulation have been devoted to imitation learning from demonstrations and reinforcement learning in simulation, which consistently require substantial amounts of robotic data.
+          </p>
+          <p>
+            In this work, we delve into the problem of harnessing LLMs for generalizable articulated object manipulation, recognizing that the rich world knowledge inherent in LLMs is adept at providing reasonable manipulation understanding of various articulated objects.However, to fully leverage the rich world knowledge within LLMs for precise articulated object manipulation, we still confront the critical challenge of converting these abstract manipulation commonsense into precise low-level robotic control.
+          </p>
+          <div class="column ">
+            <img src="./static/images/pipeline.png"
+            class="interpolation-image"
+            alt="Interpolate start reference image."/>
+            <center>
+              <p>Figure 1: Our pipeline.</p>
+            </center>
+          </div>
+          <p>
+            To tackle the aforementioned challenge, we propose a kinematic-aware prompting framework. This framework is designed to extract the kinematic knowledge of various objects and prompt LLMs to generate low-level motion trajectory waypoints for object manipulations as shown in Figure 1. The idea behind this method is that the kinematic structure of an object determines how we can manipulate it.
+            Therefore, we first propose a unified kinematic knowledge parser shown in Figure 1(a), which represents the various articulated objects as a unified textual description with the kinematic joints and contact location. Harnessing this unified description, a kinematic-aware planner is proposed to generate precise 3D manipulation waypoints for articulated object manipulation via a kinematic-aware chain-of-thought prompting as demonstrated in Figure 1(b). Concretely, it initially prompts LLMs to generate an abstract textual manipulation sequence under the kinematic structure guidance. Subsequently, it takes the generated kinematic-guided textual manipulation sequence as inputs, and outputs 3D manipulation trajectory waypoints via in-context learning for precise robotic control. With this kinematic-aware hierarchical prompting, our framework can effectively utilize LLMs to understand various object kinematic structures to achieve generalizable articulated object manipulation policy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <h3>Dataset</h3>
+          <div class="column ">
+            <img src="./static/images/dataset.png"
+            class="interpolation-image"
+            alt="Interpolate start reference image."/>
+            <center>
+              <p>Figure 2: The illustration of the articulated objects used in our experiments. Each of these entities corresponds to either a singular or a pair of manipulation instructions.</p>
+            </center>
+          </div>
+          <p>
+            To comprehensively evaluate the generalization capability of our framework, we first conduct experiments within the <a href="https://developer.nvidia.com/isaac-gym">Isaac Gym simulator</a>, utilizing 48 distinct object instances across 16 types of articulated objects from the <a href="https://sapien.ucsd.edu/browse">PartNet-Mobility</a> dataset.
+            As shown in Figure 2, our evaluation dataset contains a broad spectrum of commonplace articulated objects, which covers the diversity of manipulation policies and articulated structures.
+          </p>
+          <!-- <br> -->
+          <p>
+            To further comprehensively measure the performance of different methods, we divide the dataset into two subsets. The first subset comprises objects from eight categories of provided demonstrations, but with diverse poses and instances. The second is devoted to object categories unseen from the demonstrations, which is more challenging for the LLMs' reasoning capability and commonsense. During the evaluation, we randomly place the object in a reachable position for the robotic arm.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <h3>Results</h3>
+
+          <p>
+            We compare our method with other approaches:
+          </p>
+          <p>1. <b>LLM2Skill:</b> We implement LLM2Skill baseline as a variant of Code as Policy. We predefined 18 action primitives that could finish both the demonstrated and novel instructions. Here, LLMs would determine the suitable action primitive given the detailed object kinematic knowledge.</p>
+          <p>2. <b>LLM2Waypoints:</b> We implement this method as a naive attempt to directly output manipulation waypoints for articulated object manipulation without considering the kinematic knowledge.</p>
+          <p>3. <b>Behavior Cloning:</b> We train a language-conditioned behavior cloning algorithm on the demonstrations, leveraging the structure of Decision Transformer~\cite{chen2021decision}.</p>
+
+          <div class="column ">
+            <img src="./static/images/seen.png"
+            class="interpolation-image"
+            alt="Interpolate start reference image."/>
+            <center>
+              <p>Table 1: Evaluation results on seen categories objects.</p>
+            </center>
+          </div>
+          <p>
+            As shown in Table 1, we first evaluate the methods on seen categories, but with different poses and instances. Most LLM-based methods were able to exhibit considerable performance on these familiar categories, drawing strength from their robust in-context learning capabilities and a wealth of inherent commonsense knowledge.
+          </p>
+
+          <div class="column ">
+            <img src="./static/images/unseen.png"
+            class="interpolation-image"
+            alt="Interpolate start reference image."/>
+            <center>
+              <p>Table 2: aluation results on unseen categories objects.</p>
+            </center>
+          </div>
+          <p>
+            We further extended our evaluation to objects within unseen categories. As shown in Table 2, LLMs could easily generalize to prismatic articulated objects like kitchen pots, given that the manipulation trajectory is a simple straightforward linear path.
+            Conversely, when manipulating revolute articulated objects, these baseline models exhibit a notable decline in the average success rate.
+            However, leveraging the comprehension of the object's kinematic knowledge provided by our unified kinematic knowledge parser component, our method is adept at manipulating these revolute objects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Real-world Experiment</h2>
+        <div class="content has-text-justified">
+          <div class="column ">
+            <img src="./static/images/real_world.png"
+            class="interpolation-image"
+            alt="Interpolate start reference image."/>
+            <center>
+              <p>Real-world experiments: we generate 3D manipulation waypoints with our framework for real-world object manipulation.</p>
+            </center>
+          </div>
+          <p>
+            To demonstrate the effectiveness of our framework in practical scenarios, we conducted experiments with a Franka Panda robot arm in the real world. 
+            To convert the kinematic structure of the manipulation object into texture format with our unified kinematic knowledge parser, we first combine <a href="https://github.com/IDEA-Research/GroundingDINO">Grounding-DINO</a> and <a href="https://github.com/facebookresearch/segment-anything">Segment-anything</a> to accurately segment the target object.
+            We incorporate the <a href="https://pku-epic.github.io/GAPartNet/">GAPartNet</a> as our backbone to detect actionable parts and capture joint information.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Conclusion</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, we propose a kinematic-aware prompting framework to utilize the rich world knowledge inherent in LLMs for generalizable articulated object manipulation.  Based on the idea that the kinematic structure of an object determines the manipulation policy on it, this framework prompts LLMs with kinematic knowledge of objects to generate low-level motion trajectory waypoints for various object manipulations. Concretely, we build the unified kinematic knowledge parser and kinematic-aware planner, to empower LLMs to understand various object kinematic structures for generalizable articulated object manipulation via in-context learning.
+            We evaluate our method on 48 instances across 16 categories, and the results prove our method could generalize across unseen instances and categories with only 17 demonstrations for prompting. The real-world experiments also prove our framework's generalization to practical scenarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{xia2023balanced,
+      title={Balanced Audiovisual Dataset for Imbalance Analysis},
+      author={Xia, Wenke and Zhao, Xu and Pang, Xincheng and Zhang, Changqing and Hu, Di},
+      journal={arXiv preprint arXiv:2302.10912},
+      year={2023}
+    }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
